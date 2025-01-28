@@ -4,6 +4,6 @@ import it.corrado.dto.ProductDto;
 
 public interface ProductService {
     ProductDto createProduct(ProductDto productDto);
-    ProductDto updateProduct(ProductDto productDto,Long id);
-    void deleteProduct(Long id);
+    ProductDto updateProduct(ProductDto productDto,Long asin);
+    void deleteProduct(Long asin);
 }
