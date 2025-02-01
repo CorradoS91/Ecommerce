@@ -23,7 +23,7 @@ public class Product {
     @Column(name="PRICE")
     private double price;
     @Column(name="QUANTITY")
-    private String quantity;
+    private int quantity;
     @ManyToMany(mappedBy = "productSet")
     private Set<Order> orderSet;
     @OneToMany(mappedBy = "product")

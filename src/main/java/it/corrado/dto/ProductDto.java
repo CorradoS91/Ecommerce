@@ -12,5 +12,5 @@ public class ProductDto {
     private long Asin;
     private String name;
     private double price;
-    private String quantity;
+    private int quantity;
 }

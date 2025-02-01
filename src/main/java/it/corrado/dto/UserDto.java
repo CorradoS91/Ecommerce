@@ -1,7 +1,7 @@
 package it.corrado.dto;
 
+import it.corrado.model.Role;
 import lombok.*;
-
 import java.util.List;
 
 @Getter
@@ -14,7 +14,7 @@ public class UserDto {
     private String email;
     private String phone;
     private long balance;
-    private String role;
+    private Role role;
     private List<OrderDto> orders;
 
 }
