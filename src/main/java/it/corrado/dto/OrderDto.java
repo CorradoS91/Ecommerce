@@ -1,4 +1,5 @@
 package it.corrado.dto;
+import it.corrado.model.OrderStatus;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -12,7 +13,7 @@ import java.util.List;
 public class OrderDto {
     private long orderId;
     private String orderTotal;
-    private String orderStatus;
+    private OrderStatus orderStatus;
     private String orderPayment;
     private LocalDate doneAt;
     private LocalDate receivedAt;

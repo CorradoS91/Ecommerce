@@ -21,8 +21,9 @@ public class Order {
         private long orderId;
         @Column(name="ORDER_TOTAL")
         private BigDecimal orderTotal;
+        @Enumerated(EnumType.STRING)
         @Column(name="ORDER_STATUS")
-        private String orderStatus;
+        private OrderStatus orderStatus;
         @Column(name="ORDER_PAYMENT")
         private String orderPayment;
         @Column(name="DONE_AT")
