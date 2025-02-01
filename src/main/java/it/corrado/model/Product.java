@@ -3,6 +3,7 @@ package it.corrado.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -25,5 +26,7 @@ public class Product {
     private String quantity;
     @ManyToMany(mappedBy = "productSet")
     private Set<Order> orderSet;
+    @OneToMany(mappedBy = "product")
+    private Set<FavoriteProduct> favoriteProducts = new HashSet<>();
 
 }

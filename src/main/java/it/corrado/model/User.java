@@ -1,12 +1,15 @@
 package it.corrado.model;
 
+import it.corrado.model.FavoriteProduct;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -29,4 +32,6 @@ public class User {
     private String role;
     @OneToMany(mappedBy="user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Order> orderList;
+    @OneToMany(mappedBy = "user")
+    private Set<FavoriteProduct> favoriteProducts;
 }
