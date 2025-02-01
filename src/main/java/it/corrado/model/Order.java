@@ -1,5 +1,6 @@
 package it.corrado.model;
 
+import it.corrado.enums.OrderStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -40,4 +41,7 @@ public class Order {
                 inverseJoinColumns = @JoinColumn(name="ASIN")
         )
         private Set<Product> productSet;
+        @OneToOne(fetch = FetchType.LAZY)
+        @JoinColumn(name = "ADDRESS_ID", nullable = false)
+        private Address address;
 }

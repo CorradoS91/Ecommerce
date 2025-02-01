@@ -1,5 +1,5 @@
 package it.corrado.dto;
-import it.corrado.model.OrderStatus;
+import it.corrado.enums.OrderStatus;
 import lombok.*;
 
 import java.time.LocalDate;

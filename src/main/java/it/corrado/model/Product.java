@@ -24,6 +24,8 @@ public class Product {
     private double price;
     @Column(name="QUANTITY")
     private int quantity;
+    @Column(name="IMAGE_URL")
+    private String imageUrl;
     @ManyToMany(mappedBy = "productSet")
     private Set<Order> orderSet;
     @OneToMany(mappedBy = "product")

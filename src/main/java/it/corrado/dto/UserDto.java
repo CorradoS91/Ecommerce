@@ -1,6 +1,6 @@
 package it.corrado.dto;
 
-import it.corrado.model.Role;
+import it.corrado.enums.Role;
 import lombok.*;
 import java.util.List;
 

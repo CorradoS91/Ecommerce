@@ -3,6 +3,7 @@ package it.corrado.service.impl;
 import it.corrado.dto.FavoriteProductDto;
 import it.corrado.exception.AsinNotFoundException;
 import it.corrado.exception.IdNotFoundException;
+import it.corrado.mapper.FavoriteProductMapper;
 import it.corrado.model.FavoriteProduct;
 import it.corrado.model.Product;
 import it.corrado.model.User;
@@ -10,7 +11,6 @@ import it.corrado.repository.FavoriteProductRepository;
 import it.corrado.repository.ProductRepository;
 import it.corrado.repository.UserRepository;
 import it.corrado.service.FavoriteProductService;
-import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,13 +28,15 @@ public class FavoriteProductImpl implements FavoriteProductService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private FavoriteProductMapper favoriteProductMapper;
+
     @Override
     public void addToFavorites(FavoriteProductDto favoriteProductDto) {
-            User user =userRepository.findById(favoriteProductDto.getUserId()).orElseThrow();
-            Product product = productRepository.findById(favoriteProductDto.getProductId()).orElseThrow();
+            User user =userRepository.findById(favoriteProductDto.getUserId()).orElseThrow(()->buildIdNotFoundException(favoriteProductDto.getUserId()));
+            Product product = productRepository.findById(favoriteProductDto.getProductId()).orElseThrow(()->buildAsinNotFoundException(favoriteProductDto.getProductId()));
             if(!favoriteProductRepository.existsByUserAndProduct(user,product)){
-                FavoriteProduct favoriteProduct= new FavoriteProduct(user,product);
-                favoriteProductRepository.save(favoriteProduct);
+                favoriteProductRepository.save(favoriteProductMapper.favoriteProductDtoToFavoriteProduct(favoriteProductDto));
             }
     }
 
@@ -44,9 +46,9 @@ public class FavoriteProductImpl implements FavoriteProductService {
                 .orElseThrow(()->buildIdNotFoundException(favoriteProductDto.getUserId()));
         Product product = productRepository.findById(favoriteProductDto.getProductId())
                 .orElseThrow(()->buildAsinNotFoundException(favoriteProductDto.getProductId()));
-        FavoriteProduct favoriteProduct = favoriteProductRepository.findByUserAndProduct(user, product)
+        favoriteProductRepository.findByUserAndProduct(user, product)
                 .orElseThrow(()->buildFavoriteProductNotFoundException(favoriteProductDto.getProductId()));
-        favoriteProductRepository.delete(favoriteProduct);
+        favoriteProductRepository.delete(favoriteProductMapper.favoriteProductDtoToFavoriteProduct(favoriteProductDto));
     }
 
     @Override

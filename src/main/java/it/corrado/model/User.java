@@ -1,5 +1,6 @@
 package it.corrado.model;
 
+import it.corrado.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.List;
@@ -32,4 +33,6 @@ public class User {
     private List<Order> orderList;
     @OneToMany(mappedBy = "user")
     private Set<FavoriteProduct> favoriteProducts;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Address> addresses;
 }

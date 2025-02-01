@@ -1,4 +1,4 @@
-package it.corrado.model;
+package it.corrado.enums;
 
 public enum OrderStatus {
     AUTHORIZED,
