@@ -3,22 +3,24 @@ package it.corrado.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@Entity(name ="order")
-@Table(name="ORDER_ECOMMERCE")
+@Entity(name ="Order")
+@Table(name="ECOMMERCE_ORDER")
 public class Order {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        @Column(name="ORDER_ID")
+        @Column(name="ECOMMERCE_ORDER_ID")
         private long orderId;
         @Column(name="ORDER_TOTAL")
-        private String orderTotal;
+        private BigDecimal orderTotal;
         @Column(name="ORDER_STATUS")
         private String orderStatus;
         @Column(name="ORDER_PAYMENT")
@@ -27,4 +29,14 @@ public class Order {
         private LocalDate doneAt;
         @Column(name="RECEIVED_AT")
         private LocalDate receivedAt;
+        @ManyToOne
+        @JoinColumn(name="USER_ID",nullable=false)
+        private User user;
+        @ManyToMany
+        @JoinTable(
+                name="ORDER_PRODUCT",
+                joinColumns = @JoinColumn(name="ECOMMERCE_ORDER_ID"),
+                inverseJoinColumns = @JoinColumn(name="ASIN")
+        )
+        private Set<Product> productSet;
 }

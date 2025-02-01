@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -17,7 +19,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="USER_ID")
     private long id;
-    @Column(name="EMAIL")
+    @Column(name="EMAIL",unique = true, nullable=false)
     private String email;
     @Column(name="PHONE")
     private String phone;
@@ -25,4 +27,6 @@ public class User {
     private long balance;
     @Column(name="ROLE")
     private String role;
+    @OneToMany(mappedBy="user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Order> orderList;
 }

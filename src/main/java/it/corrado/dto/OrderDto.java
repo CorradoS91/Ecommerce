@@ -2,6 +2,7 @@ package it.corrado.dto;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -15,4 +16,5 @@ public class OrderDto {
     private String orderPayment;
     private LocalDate doneAt;
     private LocalDate receivedAt;
+    private List<ProductDto> products;
 }

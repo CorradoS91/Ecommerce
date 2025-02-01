@@ -2,6 +2,8 @@ package it.corrado.dto;
 
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Data
@@ -13,4 +15,6 @@ public class UserDto {
     private String phone;
     private long balance;
     private String role;
+    private List<OrderDto> orders;
+
 }

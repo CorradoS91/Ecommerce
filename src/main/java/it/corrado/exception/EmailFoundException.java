@@ -9,7 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class EmailNotFoundException extends RuntimeException {
+public class EmailFoundException extends RuntimeException {
   private String emailNotFound;
   private String message;
 }

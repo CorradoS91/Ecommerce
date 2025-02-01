@@ -1,15 +1,22 @@
 package it.corrado.service.impl;
 
+import it.corrado.dto.OrderDto;
 import it.corrado.dto.UserDto;
-import it.corrado.exception.EmailNotFoundException;
+import it.corrado.exception.EmailFoundException;
+import it.corrado.mapper.OrderMapper;
 import it.corrado.mapper.UserMapper;
+import it.corrado.model.Order;
 import it.corrado.model.User;
+import it.corrado.repository.OrderRepository;
 import it.corrado.repository.UserRepository;
 import it.corrado.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -18,12 +25,16 @@ public class UserServiceImpl implements UserService {
     private final UserMapper userMapper;
     @Autowired
     private final UserRepository userRepository;
+    @Autowired
+    private final OrderMapper orderMapper;
+    @Autowired
+    private final OrderRepository orderRepository;
     @Override
     public UserDto createUser(UserDto userDto) {
         User user = userMapper.userDtoToUser(userDto);
         Optional<User> userOpt= userRepository.getUserByEmail(user.getEmail());
         if(userOpt.isPresent()){
-            throw new EmailNotFoundException(user.getEmail(),"This email already exists: "+user.getEmail());
+            throw new EmailFoundException(user.getEmail(),"This email already exists: "+user.getEmail());
         }else{
             userRepository.save(user);
             return userMapper.userToUserDto(user);
@@ -33,7 +44,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto updateUser(UserDto userDto, String email) {
-        User oldUser=userRepository.getUserByEmail(email).orElseThrow(()->buildEmailNotFoundException(email));
+        User oldUser=userRepository.getUserByEmail(email).orElseThrow(()->buildEmailFoundException(email));
         userMapper.updateUser(userDto, oldUser);
         userRepository.save(oldUser);
         return userMapper.userToUserDto(oldUser);
@@ -43,11 +54,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(String email) {
-        userRepository.getUserByEmail(email).orElseThrow(()->buildEmailNotFoundException(email));
+        userRepository.getUserByEmail(email).orElseThrow(()->buildEmailFoundException(email));
         userRepository.deleteUserByEmail(email);
     }
-    private RuntimeException buildEmailNotFoundException(String email) {
-        EmailNotFoundException exception = new EmailNotFoundException();
+    private RuntimeException buildEmailFoundException(String email) {
+        EmailFoundException exception = new EmailFoundException();
         exception.setEmailNotFound(email);
         if (email != null) {
             String ms = "The following Email was not found: %s";
@@ -56,6 +67,23 @@ public class UserServiceImpl implements UserService {
         }
         return null;
     }
+    @Override
+    public List<OrderDto> getUserOrders(String email) {
+        User user = userRepository.getUserByEmail(email)
+                .orElseThrow(()->buildEmailFoundException(email));
+        return user.getOrderList().stream()
+                .map(orderMapper::orderToOrderDto)
+                .collect(Collectors.toList());
+    }
+    @Override
+    public OrderDto addOrderToUser(String email, OrderDto orderDto) {
+        User user = userRepository.getUserByEmail(email)
+                .orElseThrow(()->buildEmailFoundException(email));
 
+        Order order = orderMapper.orderDtoToOrder(orderDto);
+        order.setUser(user);
+        Order savedOrder = orderRepository.save(order);
 
+        return orderMapper.orderToOrderDto(savedOrder);
+    }
 }
