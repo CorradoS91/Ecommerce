@@ -52,7 +52,7 @@ public class FavoriteProductImpl implements FavoriteProductService {
     }
 
     @Override
-    public List<Product> getFavoriteProducts(long userId) {
+    public List<FavoriteProductDto> getFavoriteProducts(long userId) {
         return List.of();
     }
     private RuntimeException buildIdNotFoundException(Long userId) {
