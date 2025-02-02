@@ -2,7 +2,6 @@ package it.corrado.mapper;
 
 import it.corrado.dto.FavoriteProductDto;
 import it.corrado.model.FavoriteProduct;
-import it.corrado.model.Order;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
