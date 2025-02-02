@@ -23,4 +23,9 @@ public class FavoriteProduct {
     @ManyToOne
     @JoinColumn(name = "ASIN", nullable = false)
     private Product product;
+
+    public FavoriteProduct(User user, Product product) {
+        this.user=user;
+        this.product=product;
+    }
 }

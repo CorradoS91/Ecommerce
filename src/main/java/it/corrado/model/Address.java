@@ -28,6 +28,8 @@ public class Address {
     @Column(name = "COUNTRY")
     private String country;
 
+    @Column(name="IS_DEFAULT")
+    private boolean isDefault;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID", nullable = false)
     private User user;
@@ -35,4 +37,12 @@ public class Address {
     @OneToOne(mappedBy = "address")
     private Order order;
 
+    public Address(String street, String city, String postalCode, String country,Boolean isDefault , User user) {
+        this.street=street;
+        this.city=city;
+        this.postalCode=postalCode;
+        this.country=country;
+        this.isDefault=isDefault;
+        this.user=user;
+    }
 }

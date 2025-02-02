@@ -44,4 +44,13 @@ public class Order {
         @OneToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "ADDRESS_ID", nullable = false)
         private Address address;
+
+    public Order(BigDecimal orderTotal, OrderStatus orderStatus, String orderPayment, User user,Address address,Set<Product> productSet) {
+            this.orderTotal=orderTotal;
+            this.orderStatus=orderStatus;
+            this.orderPayment=orderPayment;
+            this.user=user;
+            this.address=address;
+            this.productSet=productSet;
+    }
 }

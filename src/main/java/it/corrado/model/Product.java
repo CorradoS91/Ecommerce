@@ -31,4 +31,10 @@ public class Product {
     @OneToMany(mappedBy = "product")
     private Set<FavoriteProduct> favoriteProducts = new HashSet<>();
 
+    public Product(String name, double price, int quantity, String imageUrl) {
+        this.name=name;
+        this.price=price;
+        this.quantity=quantity;
+        this.imageUrl=imageUrl;
+    }
 }

@@ -1,9 +1,11 @@
 package it.corrado.dto;
 import it.corrado.enums.OrderStatus;
+import it.corrado.model.Product;
 import lombok.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -17,5 +19,5 @@ public class OrderDto {
     private String orderPayment;
     private LocalDate doneAt;
     private LocalDate receivedAt;
-    private List<ProductDto> products;
+    private Set<Product> productSet;
 }
