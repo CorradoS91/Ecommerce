@@ -17,7 +17,7 @@ public interface UserController {
     UserDto updateUser(@PathVariable(name="email") String email,@RequestBody UserDto userDto);
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    void deleteUser(@PathVariable(name="id")Long id);
+    void deleteUser(@PathVariable(name="email")String email);
     @GetMapping("/{email}/orders")
     List<OrderDto> getUserOrders(@PathVariable String email);
     @PostMapping("/{email}/orders")

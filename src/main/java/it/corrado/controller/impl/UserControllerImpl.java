@@ -24,9 +24,9 @@ public class UserControllerImpl implements UserController {
     public UserDto updateUser(String email, UserDto userDto) {
         return userService.updateUser(userDto,email);
     }
-
     @Override
-    public void deleteUser(Long id) {
+    public void deleteUser(String email) {
+        userService.deleteUser(email);
     }
     @Override
     public List<OrderDto> getUserOrders(String email) {
