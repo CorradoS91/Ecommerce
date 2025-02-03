@@ -10,6 +10,7 @@ import lombok.*;
 @ToString
 @Entity(name ="FavoriteProduct")
 @Table(name="FAVORITE_PRODUCT")
+
 public class FavoriteProduct {
 
     @Id

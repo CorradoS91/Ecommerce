@@ -12,11 +12,15 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
+
 public class OrderServiceImpl implements OrderService {
+
     @Autowired
     private final OrderMapper orderMapper;
+
     @Autowired
     private final OrderRepository orderRepository;
+
     @Override
     public OrderDto createOrder(OrderDto orderDto) {
         Order order=orderMapper.orderDtoToOrder(orderDto);
@@ -37,6 +41,7 @@ public class OrderServiceImpl implements OrderService {
         orderRepository.findById(id).orElseThrow(()->buildIdNotFoundException(id));
         orderRepository.deleteById(id);
     }
+
     private RuntimeException buildIdNotFoundException(Long id) {
         IdNotFoundException exception = new IdNotFoundException();
         exception.setIdNotFound(id);

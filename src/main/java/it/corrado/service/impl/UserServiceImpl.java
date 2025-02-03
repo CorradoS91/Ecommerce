@@ -20,15 +20,21 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
+
 public class UserServiceImpl implements UserService {
+
     @Autowired
     private final UserMapper userMapper;
+
     @Autowired
     private final UserRepository userRepository;
+
     @Autowired
     private final OrderMapper orderMapper;
+
     @Autowired
     private final OrderRepository orderRepository;
+
     @Override
     public UserDto createUser(UserDto userDto) {
         User user = userMapper.userDtoToUser(userDto);
@@ -50,13 +56,12 @@ public class UserServiceImpl implements UserService {
         return userMapper.userToUserDto(oldUser);
     }
 
-
-
     @Override
     public void deleteUser(String email) {
         userRepository.getUserByEmail(email).orElseThrow(()->buildEmailFoundException(email));
         userRepository.deleteUserByEmail(email);
     }
+
     private RuntimeException buildEmailFoundException(String email) {
         EmailFoundException exception = new EmailFoundException();
         exception.setEmailNotFound(email);
@@ -67,6 +72,7 @@ public class UserServiceImpl implements UserService {
         }
         return null;
     }
+
     @Override
     public Set<OrderDto> getUserOrders(String email) {
         User user = userRepository.getUserByEmail(email)
@@ -77,6 +83,7 @@ public class UserServiceImpl implements UserService {
                 .map(orderMapper::orderToOrderDto)
                 .collect(Collectors.toSet());
     }
+
     @Override
     public OrderDto addOrderToUser(String email, OrderDto orderDto) {
         User user = userRepository.getUserByEmail(email)

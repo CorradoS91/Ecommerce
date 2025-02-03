@@ -9,11 +9,12 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+
 public class UserAddressDto {
+
     private Long userAddressId;
     private User user;
     private Address address;
     private Boolean isPrimary;
-
 
 }

@@ -17,7 +17,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
 @AllArgsConstructor
+
 public class FavoriteProductImpl implements FavoriteProductService {
+
     @Autowired
     private FavoriteProductRepository favoriteProductRepository;
 
@@ -55,7 +57,6 @@ public class FavoriteProductImpl implements FavoriteProductService {
         return List.of();
     }
 
-
     private RuntimeException buildIdNotFoundException(Long userId) {
         IdNotFoundException exception = new IdNotFoundException();
         exception.setIdNotFound(userId);
@@ -66,6 +67,7 @@ public class FavoriteProductImpl implements FavoriteProductService {
         }
         return null;
     }
+
     private RuntimeException buildAsinNotFoundException(Long asin) {
         AsinNotFoundException exception = new AsinNotFoundException();
         exception.setAsinNotFound(asin);
@@ -76,6 +78,7 @@ public class FavoriteProductImpl implements FavoriteProductService {
         }
         return null;
     }
+
     private RuntimeException buildFavoriteProductNotFoundException(Long favoriteProductId) {
         AsinNotFoundException exception = new AsinNotFoundException();
         exception.setAsinNotFound(favoriteProductId);

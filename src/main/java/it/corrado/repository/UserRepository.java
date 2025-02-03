@@ -7,8 +7,13 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
+
 public interface UserRepository extends JpaRepository<User,Long> {
+
     Optional <User> getUserByEmail(String email);
+
     Optional <User> getUserById(Long id);
+
     void deleteUserByEmail(String email);
+
 }

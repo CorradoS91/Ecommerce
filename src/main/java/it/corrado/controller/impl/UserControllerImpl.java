@@ -11,9 +11,12 @@ import java.util.Set;
 
 @RestController
 @RequiredArgsConstructor
+
 public class UserControllerImpl implements UserController {
+
     @Autowired
     private final UserService userService;
+
     @Override
     public UserDto createUser(UserDto userDto) {
         return userService.createUser(userDto);

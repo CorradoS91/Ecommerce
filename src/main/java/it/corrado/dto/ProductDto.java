@@ -1,6 +1,6 @@
 package it.corrado.dto;
 
-import jakarta.persistence.Column;
+
 import lombok.*;
 
 @Getter
@@ -8,10 +8,14 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+
 public class ProductDto {
+
     private long Asin;
     private String name;
     private double price;
     private int quantity;
     private String imageUrl;
+
 }
+

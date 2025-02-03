@@ -10,6 +10,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class EmailFoundException extends RuntimeException {
+
   private String emailNotFound;
   private String message;
+
 }

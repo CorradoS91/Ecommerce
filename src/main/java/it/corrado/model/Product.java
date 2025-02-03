@@ -13,21 +13,29 @@ import java.util.Set;
 @ToString
 @Entity(name ="Product")
 @Table(name="PRODUCT_ECOMMERCE")
+
 public class Product {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="ASIN")
     private long asin;
+
     @Column(name="NAME")
     private String name;
+
     @Column(name="PRICE")
     private double price;
+
     @Column(name="QUANTITY")
     private int quantity;
+
     @Column(name="IMAGE_URL")
     private String imageUrl;
+
     @ManyToMany(mappedBy = "productSet")
     private Set<Order> orderSet;
+
     @OneToMany(mappedBy = "product")
     private Set<FavoriteProduct> favoriteProducts = new HashSet<>();
 

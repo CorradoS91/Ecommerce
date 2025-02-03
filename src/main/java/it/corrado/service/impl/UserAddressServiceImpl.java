@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
+
 public class UserAddressServiceImpl implements UserAddressService {
 
     @Autowired
@@ -79,6 +80,7 @@ public class UserAddressServiceImpl implements UserAddressService {
     public void deleteUserAddress(Long id) {
         userAddressRepository.deleteById(id);
     }
+
     private RuntimeException buildIdNotFoundException(Long id) {
         IdNotFoundException exception = new IdNotFoundException();
         exception.setIdNotFound(id);

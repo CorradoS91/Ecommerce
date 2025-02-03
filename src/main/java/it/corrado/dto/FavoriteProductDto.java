@@ -10,6 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @Data
 public class FavoriteProductDto {
+
     private Long favouriteProductId;
     private User user;
     private Product product;

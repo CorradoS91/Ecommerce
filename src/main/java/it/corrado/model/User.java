@@ -22,19 +22,26 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="USER_ID")
     private long id;
+
     @Column(name="EMAIL",unique = true, nullable=false)
     private String email;
+
     @Column(name="PHONE")
     private String phone;
+
     @Column(name="BALANCE")
     private BigDecimal balance;
+
     @Enumerated(EnumType.STRING)
     @Column(name="ROLE")
     private Role role;
+
     @OneToMany(mappedBy="user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Order> orderSet = new HashSet<>();
+
     @OneToMany(mappedBy = "user")
     private Set<FavoriteProduct> favoriteProductSet=new HashSet<>();
+
     @ManyToMany
     @JoinTable(
             name = "USER_ADDRESS",

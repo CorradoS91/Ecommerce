@@ -14,6 +14,7 @@ import java.util.Set;
 
 @Component
 @RequiredArgsConstructor
+
 public class DatabaseSeeder {
 
     private final UserRepository userRepository;

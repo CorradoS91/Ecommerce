@@ -9,7 +9,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+
 public class AsinNotFoundException extends RuntimeException {
+
    private Long asinNotFound;
    private String message;
+
 }

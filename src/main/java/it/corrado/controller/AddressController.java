@@ -8,17 +8,23 @@ import java.util.Optional;
 import java.util.Set;
 
 @RequestMapping("/address")
+
 public interface AddressController {
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     AddressDto createAddress(@RequestBody AddressDto addressDto);
+
     @GetMapping("/{addressId}")
     Optional<AddressDto> getAddressById(Long addressId);
+
     @GetMapping("/{userId}/addresses")
     Set<AddressDto> getAddressesByUserId(Long userId);
+
     @PutMapping("{addressId}")
     @ResponseStatus(HttpStatus.OK)
     AddressDto updateAddress(@PathVariable(name="addressId") Long addressId,@RequestBody AddressDto AddressDto);
+
     @DeleteMapping("/{addressId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     void deleteAddress(@PathVariable(name="id")Long addressId);

@@ -10,7 +10,9 @@ import lombok.*;
 @ToString
 @Entity(name ="UserAddress")
 @Table(name="USER_ADDRESS")
+
 public class UserAddress {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,6 +25,7 @@ public class UserAddress {
     @JoinColumn(name = "ADDRESS_ID")
     private Address address;
 
+    @Column(name="IS_PRIMARY")
     private Boolean isPrimary;
 
 }

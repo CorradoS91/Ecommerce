@@ -10,10 +10,15 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
+
 public interface FavoriteProductRepository extends JpaRepository<FavoriteProduct, Long> {
+
     List<FavoriteProduct> findByUser(User user);
+
     List<FavoriteProduct> findByProduct(Product product);
+
     boolean existsByUserAndProduct(User user, Product product);
+
     Optional <FavoriteProduct> findByUserAndProduct(User user, Product product);
 }
 

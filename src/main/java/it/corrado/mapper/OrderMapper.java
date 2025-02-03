@@ -7,8 +7,13 @@ import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+
 public interface OrderMapper {
+
     OrderDto orderToOrderDto(Order order);
+
     Order orderDtoToOrder(OrderDto orderDto);
+
     void updateOrder(OrderDto orderDto, @MappingTarget Order order);
+
 }

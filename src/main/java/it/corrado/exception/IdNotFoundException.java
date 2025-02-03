@@ -10,6 +10,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class IdNotFoundException extends RuntimeException {
+
     private Long idNotFound;
     private String message;
+
 }

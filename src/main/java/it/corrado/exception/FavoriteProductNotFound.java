@@ -9,7 +9,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+
 public class FavoriteProductNotFound extends RuntimeException {
+
     private Long FavoriteProductIdNotFound;
     private String message;
+
 }

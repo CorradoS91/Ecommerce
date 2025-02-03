@@ -15,7 +15,9 @@ import java.util.Set;
 @ToString
 @Entity(name ="Order")
 @Table(name="ECOMMERCE_ORDER")
+
 public class Order {
+
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name="ECOMMERCE_ORDER_ID")
