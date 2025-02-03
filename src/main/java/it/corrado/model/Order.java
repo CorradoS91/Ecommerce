@@ -20,20 +20,27 @@ public class Order {
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name="ECOMMERCE_ORDER_ID")
         private long orderId;
+
         @Column(name="ORDER_TOTAL")
         private BigDecimal orderTotal;
+
         @Enumerated(EnumType.STRING)
         @Column(name="ORDER_STATUS")
         private OrderStatus orderStatus;
+
         @Column(name="ORDER_PAYMENT")
         private String orderPayment;
+
         @Column(name="DONE_AT")
         private LocalDate doneAt;
+
         @Column(name="RECEIVED_AT")
         private LocalDate receivedAt;
+
         @ManyToOne
         @JoinColumn(name="USER_ID",nullable=false)
         private User user;
+
         @ManyToMany
         @JoinTable(
                 name="ORDER_PRODUCT",
@@ -41,6 +48,7 @@ public class Order {
                 inverseJoinColumns = @JoinColumn(name="ASIN")
         )
         private Set<Product> productSet;
+
         @OneToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "ADDRESS_ID", nullable = false)
         private Address address;

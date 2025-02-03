@@ -1,6 +1,5 @@
 package it.corrado.repository;
 
-import it.corrado.dto.UserDto;
 import it.corrado.model.FavoriteProduct;
 import it.corrado.model.Product;
 import it.corrado.model.User;

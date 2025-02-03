@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -32,16 +32,26 @@ public class User {
     @Column(name="ROLE")
     private Role role;
     @OneToMany(mappedBy="user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Order> orderList;
+    private Set<Order> orderSet = new HashSet<>();
     @OneToMany(mappedBy = "user")
-    private Set<FavoriteProduct> favoriteProducts;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Address> addresses;
+    private Set<FavoriteProduct> favoriteProductSet=new HashSet<>();
+    @ManyToMany
+    @JoinTable(
+            name = "USER_ADDRESS",
+            joinColumns = @JoinColumn(name = "USER_ID"),
+            inverseJoinColumns = @JoinColumn(name = "ADDRESS_ID")
+    )
+    private Set<Address> addressesSet = new HashSet<>();
 
-    public User(String email, String phone, BigDecimal balance, Role role) {
+    @OneToMany(mappedBy = "user")
+    private Set<UserAddress> userAddresses = new HashSet<>();
+
+    public User(String email, String phone, BigDecimal balance, Role role, Set<Order> orderSet, Set<Address> addressesSet) {
         this.email = email;
         this.phone = phone;
         this.balance = balance;
         this.role = role;
+        this.orderSet=orderSet;
+        this.addressesSet=addressesSet;
     }
 }

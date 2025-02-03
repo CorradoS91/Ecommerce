@@ -5,7 +5,7 @@ import it.corrado.dto.UserDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Set;
 
 @RequestMapping("/user")
 public interface UserController {
@@ -19,7 +19,7 @@ public interface UserController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     void deleteUser(@PathVariable(name="email")String email);
     @GetMapping("/{email}/orders")
-    List<OrderDto> getUserOrders(@PathVariable String email);
+    Set<OrderDto> getUserOrders(@PathVariable String email);
     @PostMapping("/{email}/orders")
     OrderDto addOrderToUser(@PathVariable String email, @RequestBody OrderDto orderDto);
 

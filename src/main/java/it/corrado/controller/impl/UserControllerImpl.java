@@ -7,8 +7,7 @@ import it.corrado.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequiredArgsConstructor
@@ -29,7 +28,7 @@ public class UserControllerImpl implements UserController {
         userService.deleteUser(email);
     }
     @Override
-    public List<OrderDto> getUserOrders(String email) {
+    public Set<OrderDto> getUserOrders(String email) {
         return userService.getUserOrders(email);
     }
     @Override

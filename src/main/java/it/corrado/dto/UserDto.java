@@ -1,8 +1,9 @@
 package it.corrado.dto;
 
 import it.corrado.enums.Role;
+import it.corrado.model.Address;
 import lombok.*;
-import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -15,6 +16,7 @@ public class UserDto {
     private String phone;
     private long balance;
     private Role role;
-    private List<OrderDto> orders;
+    private Set<OrderDto> orders;
+    private Set<Address> address;
 
 }

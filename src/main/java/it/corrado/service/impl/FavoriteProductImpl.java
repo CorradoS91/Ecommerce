@@ -4,7 +4,6 @@ import it.corrado.dto.FavoriteProductDto;
 import it.corrado.exception.AsinNotFoundException;
 import it.corrado.exception.IdNotFoundException;
 import it.corrado.mapper.FavoriteProductMapper;
-import it.corrado.model.FavoriteProduct;
 import it.corrado.model.Product;
 import it.corrado.model.User;
 import it.corrado.repository.FavoriteProductRepository;
@@ -33,8 +32,8 @@ public class FavoriteProductImpl implements FavoriteProductService {
 
     @Override
     public void addToFavorites(FavoriteProductDto favoriteProductDto) {
-            User user =userRepository.findById(favoriteProductDto.getUserId()).orElseThrow(()->buildIdNotFoundException(favoriteProductDto.getUserId()));
-            Product product = productRepository.findById(favoriteProductDto.getProductId()).orElseThrow(()->buildAsinNotFoundException(favoriteProductDto.getProductId()));
+            User user =userRepository.findById(favoriteProductDto.getUser().getId()).orElseThrow(()->buildIdNotFoundException(favoriteProductDto.getUser().getId()));
+            Product product = productRepository.findById(favoriteProductDto.getProduct().getAsin()).orElseThrow(()->buildAsinNotFoundException(favoriteProductDto.getProduct().getAsin()));
             if(!favoriteProductRepository.existsByUserAndProduct(user,product)){
                 favoriteProductRepository.save(favoriteProductMapper.favoriteProductDtoToFavoriteProduct(favoriteProductDto));
             }
@@ -42,12 +41,12 @@ public class FavoriteProductImpl implements FavoriteProductService {
 
     @Override
     public void removeFromFavorites(FavoriteProductDto favoriteProductDto) {
-        User user = userRepository.getUserById(favoriteProductDto.getUserId())
-                .orElseThrow(()->buildIdNotFoundException(favoriteProductDto.getUserId()));
-        Product product = productRepository.findById(favoriteProductDto.getProductId())
-                .orElseThrow(()->buildAsinNotFoundException(favoriteProductDto.getProductId()));
+        User user = userRepository.getUserById(favoriteProductDto.getUser().getId())
+                .orElseThrow(()->buildIdNotFoundException(favoriteProductDto.getUser().getId()));
+        Product product = productRepository.findById(favoriteProductDto.getProduct().getAsin())
+                .orElseThrow(()->buildAsinNotFoundException(favoriteProductDto.getProduct().getAsin()));
         favoriteProductRepository.findByUserAndProduct(user, product)
-                .orElseThrow(()->buildFavoriteProductNotFoundException(favoriteProductDto.getProductId()));
+                .orElseThrow(()->buildFavoriteProductNotFoundException(favoriteProductDto.getProduct().getAsin()));
         favoriteProductRepository.delete(favoriteProductMapper.favoriteProductDtoToFavoriteProduct(favoriteProductDto));
     }
 
@@ -55,6 +54,8 @@ public class FavoriteProductImpl implements FavoriteProductService {
     public List<FavoriteProductDto> getFavoriteProducts(long userId) {
         return List.of();
     }
+
+
     private RuntimeException buildIdNotFoundException(Long userId) {
         IdNotFoundException exception = new IdNotFoundException();
         exception.setIdNotFound(userId);

@@ -1,6 +1,6 @@
 package it.corrado.dto;
 
-import it.corrado.model.Product;
+import it.corrado.model.Address;
 import it.corrado.model.User;
 import lombok.*;
 
@@ -9,9 +9,11 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class FavoriteProductDto {
-    private Long favouriteProductId;
+public class UserAddressDto {
+    private Long userAddressId;
     private User user;
-    private Product product;
+    private Address address;
+    private Boolean isPrimary;
+
 
 }

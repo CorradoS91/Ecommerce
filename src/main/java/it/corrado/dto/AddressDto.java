@@ -1,9 +1,9 @@
 package it.corrado.dto;
 
-import it.corrado.model.Order;
-import it.corrado.model.User;
-import jakarta.persistence.*;
+
 import lombok.*;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -16,7 +16,4 @@ public class AddressDto {
     private String city;
     private String postalCode;
     private String country;
-    private boolean isDefault;
-    private User user;
-    private Order order;
 }

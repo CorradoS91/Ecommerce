@@ -5,8 +5,10 @@ import it.corrado.service.AddressService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Collections;
 import java.util.Optional;
+import java.util.Set;
+
 @Service
 @AllArgsConstructor
 public class AddressImpl implements AddressService {
@@ -21,8 +23,8 @@ public class AddressImpl implements AddressService {
     }
 
     @Override
-    public List<AddressDto> getAddressesByUserId(Long userId) {
-        return List.of();
+    public Set<AddressDto> getAddressesByUserId(Long userId) {
+        return Collections.EMPTY_SET;
     }
 
     @Override

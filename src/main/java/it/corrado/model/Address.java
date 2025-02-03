@@ -3,6 +3,9 @@ package it.corrado.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -28,21 +31,20 @@ public class Address {
     @Column(name = "COUNTRY")
     private String country;
 
-    @Column(name="IS_DEFAULT")
-    private boolean isDefault;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "USER_ID", nullable = false)
-    private User user;
-
     @OneToOne(mappedBy = "address")
     private Order order;
 
-    public Address(String street, String city, String postalCode, String country,Boolean isDefault , User user) {
+    @ManyToMany(mappedBy = "addressesSet")
+    private Set<User> usersSet = new HashSet<>();
+
+    @OneToMany(mappedBy = "address")
+    private Set<UserAddress> userAddresses = new HashSet<>();
+
+    public Address(String street, String city, String postalCode, String country,Boolean isDefault,Set<User> usersSet) {
         this.street=street;
         this.city=city;
         this.postalCode=postalCode;
         this.country=country;
-        this.isDefault=isDefault;
-        this.user=user;
+        this.usersSet=usersSet;
     }
 }

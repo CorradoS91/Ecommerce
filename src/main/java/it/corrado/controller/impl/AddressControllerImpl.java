@@ -7,8 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequiredArgsConstructor
@@ -28,7 +28,7 @@ public class AddressControllerImpl implements AddressController {
     }
 
     @Override
-    public List<AddressDto> getAddressesByUserId(Long userId) {
+    public Set<AddressDto> getAddressesByUserId(Long userId) {
         return addressService.getAddressesByUserId(userId);
     }
 

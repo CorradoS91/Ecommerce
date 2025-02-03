@@ -4,8 +4,9 @@ import it.corrado.dto.AddressDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+
 @RequestMapping("/address")
 public interface AddressController {
     @PostMapping
@@ -14,7 +15,7 @@ public interface AddressController {
     @GetMapping("/{addressId}")
     Optional<AddressDto> getAddressById(Long addressId);
     @GetMapping("/{userId}/addresses")
-    List<AddressDto> getAddressesByUserId(Long userId);
+    Set<AddressDto> getAddressesByUserId(Long userId);
     @PutMapping("{addressId}")
     @ResponseStatus(HttpStatus.OK)
     AddressDto updateAddress(@PathVariable(name="addressId") Long addressId,@RequestBody AddressDto AddressDto);

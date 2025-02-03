@@ -1,8 +1,6 @@
 package it.corrado.service;
 
 import it.corrado.dto.FavoriteProductDto;
-import it.corrado.model.Product;
-
 import java.util.List;
 
 public interface FavoriteProductService {

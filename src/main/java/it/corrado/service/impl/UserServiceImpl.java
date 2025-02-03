@@ -14,8 +14,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -68,12 +68,14 @@ public class UserServiceImpl implements UserService {
         return null;
     }
     @Override
-    public List<OrderDto> getUserOrders(String email) {
+    public Set<OrderDto> getUserOrders(String email) {
         User user = userRepository.getUserByEmail(email)
                 .orElseThrow(()->buildEmailFoundException(email));
-        return user.getOrderList().stream()
+        Set<Order> orders = user.getOrderSet();
+
+        return orders.stream()
                 .map(orderMapper::orderToOrderDto)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
     @Override
     public OrderDto addOrderToUser(String email, OrderDto orderDto) {
