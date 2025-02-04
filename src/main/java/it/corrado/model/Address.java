@@ -42,7 +42,7 @@ public class Address {
     @OneToMany(mappedBy = "address")
     private Set<UserAddress> userAddresses = new HashSet<>();
 
-    public Address(String street, String city, String postalCode, String country,Boolean isDefault,Set<User> usersSet) {
+    public Address(String street, String city, String postalCode, String country,Set<User> usersSet) {
         this.street=street;
         this.city=city;
         this.postalCode=postalCode;

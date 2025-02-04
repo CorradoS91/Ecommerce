@@ -1,5 +1,6 @@
 package it.corrado.service.impl;
 
+import it.corrado.dto.AddressDto;
 import it.corrado.dto.UserAddressDto;
 import it.corrado.dto.UserDto;
 import it.corrado.exception.EmailFoundException;
@@ -54,11 +55,6 @@ public class UserAddressServiceImpl implements UserAddressService {
         return Optional.of(userAddressMapper.userAddressToUserAddressDto(userAddress));
     }
 
-    @Override
-    public UserAddressDto createUserAddress(UserAddressDto UserAddressDto) {
-        return null;
-    }
-
     public UserAddressDto updateUserAddress(Long id, UserAddressDto newUserAddressDto) {
         return userAddressRepository.findById(id).map(existingUserAddress -> {
             existingUserAddress.setIsPrimary(newUserAddressDto.getIsPrimary());
@@ -79,6 +75,42 @@ public class UserAddressServiceImpl implements UserAddressService {
 
     public void deleteUserAddress(Long id) {
         userAddressRepository.deleteById(id);
+    }
+
+    @Override
+    public void assignAddressToUser(Long userId, AddressDto addressDto) {
+        User user=userRepository.getUserById(userId).orElseThrow(()->buildIdNotFoundException(userId));
+        Address address=addressRepository.findById(addressDto.getAddressId()).orElseThrow(()->buildIdNotFoundException(addressDto.getAddressId()));
+        if(user.getUserAddresses().isEmpty()){
+            UserAddress userAddress=new UserAddress();
+            userAddress.setUser(user);
+            userAddress.setAddress(address);
+            userAddress.setIsPrimary(Boolean.TRUE);
+        }
+        user.getUserAddresses().forEach(existingAddress->{
+            if(existingAddress.getIsPrimary()){
+                existingAddress.setIsPrimary(Boolean.FALSE);
+                userAddressRepository.save(existingAddress);
+            }
+        });
+
+    }
+
+    @Override
+    public void setPrimaryAddress(Long userId, AddressDto addressDto) {
+        User user = userRepository.getUserById(userId).orElseThrow(()->buildIdNotFoundException(userId));
+        user.getUserAddresses().forEach(existingAddress ->{
+            if(existingAddress.getIsPrimary()){
+                existingAddress.setIsPrimary(Boolean.FALSE);
+                userAddressRepository.save(existingAddress);
+            }
+        });
+        UserAddress newPrimaryAddr=user.getUserAddresses().stream().filter(
+                userA ->userA.getAddress()
+                        .getAddressId()==addressDto.getAddressId()).findFirst()
+                .orElseThrow(()->new RuntimeException(("Address not associated with user")));
+        newPrimaryAddr.setIsPrimary(Boolean.TRUE);
+        userAddressRepository.save(newPrimaryAddr);
     }
 
     private RuntimeException buildIdNotFoundException(Long id) {
