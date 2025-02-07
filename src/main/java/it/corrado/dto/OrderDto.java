@@ -5,6 +5,7 @@ import it.corrado.model.Product;
 import it.corrado.model.User;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -17,7 +18,7 @@ import java.util.Set;
 public class OrderDto {
 
     private long orderId;
-    private String orderTotal;
+    private BigDecimal orderTotal;
     private OrderStatus orderStatus;
     private String orderPayment;
     private LocalDate doneAt;
